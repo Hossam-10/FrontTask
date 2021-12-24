@@ -1,7 +1,15 @@
 <template>
-  <Tutorial/>
+  <div>
+    <h1 class="text-center">Login</h1>
+    <LoginForm />
+  </div>
 </template>
 
 <script>
-export default {}
+import LoginForm from "@/components/LoginForm";
+export default {
+  components: {
+    LoginForm,
+  },
+};
 </script>
