@@ -19,6 +19,9 @@ const createStore = () => {
       setUserData(state, payload) {
         state.userData = payload;
       },
+      deleteUserData(state) {
+        state.userData = {};
+      },
       setEmployeesData(state, payload) {
         state.employees.data = payload;
         //state.employees.total = payload.total;
@@ -73,6 +76,12 @@ const createStore = () => {
       },
       deleteEmployee({}, payload) {
         return this.$axios.$delete(`users/${payload}`);
+      },
+      userLogout({ commit }) {
+        return this.$axios.$post("logout").then(() => {
+          this.$cookies.remove("authenticationToken");
+          commit("deleteUserData");
+        });
       },
     },
   });
