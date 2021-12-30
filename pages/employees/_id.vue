@@ -1,10 +1,9 @@
 <template>
   <div>
-    <b-overlay :show="employeeIsLoaded" rounded="" :opacity="1">
+    <b-overlay :show="employeeIsLoaded" rounded="lg" :opacity="1">
       <div class="text-center my-2">
-        <img class="rounded-circle" :src="singleEmployee.avatar" />
         <p class="mt-2">
-          {{ singleEmployee.first_name + " " + singleEmployee.last_name }}
+          {{ singleEmployee.name }}
         </p>
         <p>{{ singleEmployee.email }}</p>
       </div>

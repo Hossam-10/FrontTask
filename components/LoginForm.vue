@@ -5,10 +5,6 @@
       <AppInput type="password" v-model="loginInformation.password"
         >Password</AppInput
       >
-      <div>
-        <input type="checkbox" v-model="loginInformation.isAdmin" />
-        <label>Admin</label>
-      </div>
       <button class="d-block btn btn-info ml-auto">Submit</button>
     </form>
   </div>
@@ -27,7 +23,6 @@ export default {
       loginInformation: {
         email: "",
         password: "",
-        isAdmin: false,
       },
     };
   },
