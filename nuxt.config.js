@@ -1,7 +1,4 @@
 export default {
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
-
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "FrontTask",
@@ -21,7 +18,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ["@/plugins/axios.js"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,
@@ -35,11 +32,12 @@ export default {
     "bootstrap-vue/nuxt",
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
+    "cookie-universal-nuxt",
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: "https://reqres.in/",
+    baseURL: "http://148.251.146.85/api/",
     headers: {
       common: {
         "Content-Type": "application/json",
