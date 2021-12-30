@@ -1,13 +1,18 @@
 <template>
   <div class="w-50 my-2 ml-2">
     <form @submit.prevent="handleEmployeeForm">
-      <AppInput type="text" v-model="employeeDetails.firstName"
-        >First Name</AppInput
-      >
-      <AppInput type="text" v-model="employeeDetails.lastName"
-        >Last Name</AppInput
-      >
+      <AppInput type="text" v-model="employeeDetails.name">Name</AppInput>
       <AppInput type="email" v-model="employeeDetails.email">Email</AppInput>
+      <AppInput type="password" v-model="employeeDetails.password"
+        >Password</AppInput
+      >
+      <AppInput type="password" v-model="employeeDetails.confirmPassword"
+        >Confirm Password</AppInput
+      >
+      <div>
+        <input type="checkbox" v-model="employeeDetails.isAdmin" />
+        <label>Admin</label>
+      </div>
       <button class="d-block btn btn-info ml-auto" type="submit">Submit</button>
     </form>
   </div>
@@ -30,58 +35,85 @@ export default {
   data() {
     return {
       employeeDetails: {
-        firstName: "",
-        lastName: "",
+        name: "",
         email: "",
+        password: "",
+        confirmPassword: "",
+        isAdmin: false,
       },
     };
   },
   methods: {
     ...mapActions(["addEmployee", "updateEmployee"]),
+    checkEqualPasswords() {
+      if (
+        this.employeeDetails.password === this.employeeDetails.confirmPassword
+      )
+        return true;
+      else {
+        return false;
+      }
+    },
     handleEmployeeForm() {
-      if (this.employee) {
-        this.addEmployee({
-          first_name: this.employeeDetails.firstName,
-          last_name: this.employeeDetails.lastName,
-          email: this.employeeDetails.email,
-        })
-          .then(() => {
-            this.$router.push("/employees");
+      if (this.checkEqualPasswords()) {
+        if (!this.employee) {
+          this.addEmployee({
+            name: this.employeeDetails.name,
+            email: this.employeeDetails.email,
+            password: this.employeeDetails.password,
+            password_confirmation: this.employeeDetails.confirmPassword,
+            is_admin: this.employeeDetails.isAdmin,
           })
-          .catch(() => {
-            this.$bvToast.toast("Please try again", {
-              title: "Something went wrong",
-              variant: "primary",
-              toaster: "b-toaster-top-center",
-              solid: true,
+            .then(() => {
+              this.$router.push("/employees");
+            })
+            .catch(() => {
+              this.$bvToast.toast("Please try again", {
+                title: "Something went wrong",
+                variant: "primary",
+                toaster: "b-toaster-top-center",
+                solid: true,
+              });
             });
-          });
+        } else {
+          this.updateEmployee({
+            name: this.employeeDetails.name,
+            email: this.employeeDetails.email,
+            password: this.employeeDetails.password,
+            password_confirmation: this.employeeDetails.confirmPassword,
+            is_admin: this.employeeDetails.isAdmin,
+            id: this.employeeDetails.id,
+          })
+            .then(() => {
+              this.$router.push("/employees");
+            })
+            .catch(() => {
+              this.$bvToast.toast("Please try again", {
+                title: "Something went wrong!",
+                variant: "primary",
+                toaster: "b-toaster-top-center",
+                solid: true,
+              });
+            });
+        }
       } else {
-        this.updateEmployee({
-          first_name: this.employeeDetails.firstName,
-          last_name: this.employeeDetails.lastName,
-          email: this.employeeDetails.email,
-          id: this.employeeDetails.id,
-        })
-          .then(() => {
-            this.$router.push("/employees");
-          })
-          .catch(() => {
-            this.$bvToast.toast("Please try again", {
-              title: "Something went wrong!",
-              variant: "primary",
-              toaster: "b-toaster-top-center",
-              solid: true,
-            });
-          });
+        this.$bvToast.toast("Passwords are not equal", {
+          title: "Password and Confirm password must be equal",
+          variant: "primary",
+          toaster: "b-toaster-top-center",
+          solid: true,
+        });
       }
     },
   },
   watch: {
     employee(newVal) {
-      this.employeeDetails.firstName = newVal.first_name;
-      this.employeeDetails.lastName = newVal.last_name;
+      this.employeeDetails.name = newVal.name;
       this.employeeDetails.email = newVal.email;
+      this.employeeDetails.password = newVal.password;
+      this.employeeDetails.confirmPassword = newVal.password_confirmation;
+      this.employeeDetails.isAdmin = newVal.is_admin;
+      this.employeeDetails.id = newVal.id;
     },
   },
 };

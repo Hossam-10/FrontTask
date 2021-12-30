@@ -26,7 +26,7 @@
               />
             </b-col>
           </b-row>
-          <div class="mt-3">
+          <!-- <div class="mt-3">
             <b-pagination
               :value="employees.params.page"
               :total-rows="employees.total"
@@ -36,7 +36,7 @@
               size="md"
               align="center"
             ></b-pagination>
-          </div>
+          </div> -->
         </div>
       </b-overlay>
     </b-container>
@@ -57,13 +57,14 @@ export default {
     ...mapState(["employees"]),
   },
   methods: {
-    ...mapActions(["getEmployees", "updateEmployeesParams", "deleteEmployee"]),
-    updateEmployeesPagination(page) {
-      this.updateEmployeesParams({ page });
-    },
+    // ...mapActions(["getEmployees", "updateEmployeesParams", "deleteEmployee"]),
+    ...mapActions(["getEmployees", "deleteEmployee"]),
+    // updateEmployeesPagination(page) {
+    //   this.updateEmployeesParams({ page });
+    // },
     deleteSingleEmp(id) {
       this.deleteEmployee(id).then(() => {
-        this.updateEmployeesParams({ page: 1 });
+        this.$router.go();
       });
     },
   },
