@@ -30,7 +30,9 @@ export default {
     ...mapActions(["handleLogin"]),
     handleFormLogin() {
       this.handleLogin(this.loginInformation)
-        .then(() => this.$router.push("/employees"))
+        .then(() => {
+          this.$router.push("/employees");
+        })
         .catch(() => {
           this.$bvToast.toast("Wrong Email or Password", {
             title: "Login information is not correct",

@@ -48,7 +48,7 @@ const createStore = () => {
           commit("setUserData", userData);
         });
       },
-      getEmployees({ state, commit }) {
+      getEmployees({ commit }) {
         commit("updateEmployeesLoading", true);
         this.$axios
           .$get("users")

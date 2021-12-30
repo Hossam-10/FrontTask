@@ -19,6 +19,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 export default {
+  middleware: "require-auth",
   computed: {
     ...mapState(["userData"]),
   },
