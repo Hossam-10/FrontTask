@@ -5,7 +5,7 @@
         <p>name: {{ employee.name }}</p>
         <p>email: {{ employee.email }}</p>
       </div>
-      <div class="d-flex justify-content-around" v-if="employee.is_admin">
+      <div class="d-flex justify-content-around" v-if="userData.is_admin">
         <nuxt-link :to="`/employees/${employee.id}`">
           <button class="btn btn-outline-success">View</button>
         </nuxt-link>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "EmployeeCard",
   props: {
@@ -31,6 +32,9 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  computed: {
+    ...mapState(["userData"]),
   },
 };
 </script>
