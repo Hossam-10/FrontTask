@@ -62,7 +62,7 @@ export default {
             email: this.employeeDetails.email,
             password: this.employeeDetails.password,
             password_confirmation: this.employeeDetails.confirmPassword,
-            is_admin: this.employeeDetails.isAdmin,
+            is_admin: this.employeeDetails.isAdmin ? 1 : 0,
           })
             .then(() => {
               this.$router.push("/employees");
@@ -81,7 +81,7 @@ export default {
             email: this.employeeDetails.email,
             password: this.employeeDetails.password,
             password_confirmation: this.employeeDetails.confirmPassword,
-            is_admin: this.employeeDetails.isAdmin,
+            is_admin: this.employeeDetails.isAdmin ? 1 : 0,
             id: this.employeeDetails.id,
           })
             .then(() => {
@@ -112,7 +112,7 @@ export default {
       this.employeeDetails.email = newVal.email;
       this.employeeDetails.password = newVal.password;
       this.employeeDetails.confirmPassword = newVal.password_confirmation;
-      this.employeeDetails.isAdmin = newVal.is_admin;
+      this.employeeDetails.isAdmin = newVal.is_admin == 1 ? true : false;
       this.employeeDetails.id = newVal.id;
     },
   },
