@@ -2,7 +2,7 @@
 
 Updated notes:
 1-If you refresh the website after login you won't find user information
-because there's no API to return the user data I need this API to.
+because there's no API to return the user data I need this API to retrieve the user's information.
 
 2-User's create API is broken it returns server error therefore I can't do the
 review and feedback part cause I have only one user and I need multiple users.
