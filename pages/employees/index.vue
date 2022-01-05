@@ -64,7 +64,13 @@ export default {
     // },
     deleteSingleEmp(id) {
       this.deleteEmployee(id).then(() => {
-        this.$router.go();
+        this.$bvToast.toast("Deleted Succefully", {
+          title: "Employee is deleted succefully",
+          variant: "success",
+          toaster: "b-toaster-top-center",
+          solid: true,
+        });
+        this.getEmployees();
       });
     },
   },
