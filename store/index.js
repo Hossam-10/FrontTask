@@ -83,6 +83,9 @@ const createStore = () => {
           commit("deleteUserData");
         });
       },
+      confirmReview({}, payload) {
+        return this.$axios.$post("performance-reviews", payload);
+      },
     },
   });
 };

@@ -5,19 +5,30 @@
         <p>name: {{ employee.name }}</p>
         <p>email: {{ employee.email }}</p>
       </div>
-      <div class="d-flex justify-content-around" v-if="userData.is_admin">
-        <nuxt-link :to="`/employees/${employee.id}`">
-          <button class="btn btn-outline-success">View</button>
-        </nuxt-link>
-        <nuxt-link :to="`employees/edit/${employee.id}`">
-          <button class="btn btn-outline-info">Update</button>
-        </nuxt-link>
-        <button
-          @click="$emit('delete-employee')"
-          class="btn btn-outline-danger"
-        >
-          Delete
-        </button>
+      <div v-if="userData.is_admin">
+        <div class="d-flex justify-content-around">
+          <nuxt-link :to="`/employees/${employee.id}`">
+            <button class="btn btn-outline-success">View</button>
+          </nuxt-link>
+          <nuxt-link :to="`employees/edit/${employee.id}`">
+            <button class="btn btn-outline-info">Update</button>
+          </nuxt-link>
+          <button
+            @click="$emit('delete-employee')"
+            class="btn btn-outline-danger"
+          >
+            Delete
+          </button>
+        </div>
+
+        <div class="w-75 m-auto" v-if="userData.id != employee.id">
+          <nuxt-link
+            class="btn btn-outline-primary w-100 mt-2"
+            :to="`review/${employee.id}`"
+          >
+            Performance Review
+          </nuxt-link>
+        </div>
       </div>
     </div>
   </div>
