@@ -37,7 +37,6 @@ export default {
   methods: {
     ...mapActions(["updateReview"]),
     handleUpdateReview() {
-      console.log(this.reviewData);
       this.updateReview({
         review: {
           review: this.reviewData,
