@@ -23,6 +23,7 @@ export default {
   props: {
     review: {
       type: String,
+      default: "",
     },
   },
   data() {
@@ -58,10 +59,12 @@ export default {
   },
   watch: {
     review(newVal) {
-      let oldReviewData = JSON.parse(newVal);
-      this.reviewData.performance = oldReviewData.performance;
-      this.reviewData.speed = oldReviewData.speed;
-      this.reviewData.typing = oldReviewData.typing;
+      if (!newVal == "") {
+        let oldReviewData = JSON.parse(newVal);
+        this.reviewData.performance = oldReviewData.performance;
+        this.reviewData.speed = oldReviewData.speed;
+        this.reviewData.typing = oldReviewData.typing;
+      }
     },
   },
 };
