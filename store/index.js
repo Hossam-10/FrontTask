@@ -14,6 +14,11 @@ const createStore = () => {
         // },
       },
       singleEmployee: {},
+      reviews: {
+        data: [],
+        loading: null,
+      },
+      singleReview: {},
     },
     mutations: {
       setUserData(state, payload) {
@@ -37,6 +42,15 @@ const createStore = () => {
       // },
       setSingleEmployee(state, payload) {
         state.singleEmployee = payload;
+      },
+      setReviews(state, payload) {
+        state.reviews.data = payload;
+      },
+      updateReviewsLoading(state, payload) {
+        state.reviews.loading = payload;
+      },
+      setSingleReview(state, payload) {
+        state.singleReview = payload;
       },
     },
     actions: {
@@ -82,6 +96,34 @@ const createStore = () => {
           this.$cookies.remove("authenticationToken");
           commit("deleteUserData");
         });
+      },
+      confirmReview({}, payload) {
+        return this.$axios.$post("performance-reviews", payload);
+      },
+      getAllReviews({ commit }) {
+        commit("updateReviewsLoading", true);
+        return this.$axios
+          .$get("performance-reviews")
+          .then((res) => {
+            commit("setReviews", res.data.reviews);
+          })
+          .finally(() => {
+            commit("updateReviewsLoading", false);
+          });
+      },
+      getSingleReview({ commit }, payload) {
+        this.$axios.$get(`performance-reviews/${payload}`).then((res) => {
+          commit("setSingleReview", res.data.review);
+        });
+      },
+      deleteSingleReview({}, payload) {
+        return this.$axios.$delete(`performance-reviews/${payload}`);
+      },
+      updateReview({}, payload) {
+        return this.$axios.$put(
+          `performance-reviews/${payload.id}`,
+          payload.review
+        );
       },
     },
   });
