@@ -18,6 +18,7 @@ const createStore = () => {
         data: [],
         loading: null,
       },
+      singleReview: {},
     },
     mutations: {
       setUserData(state, payload) {
@@ -47,6 +48,9 @@ const createStore = () => {
       },
       updateReviewsLoading(state, payload) {
         state.reviews.loading = payload;
+      },
+      setSingleReview(state, payload) {
+        state.singleReview = payload;
       },
     },
     actions: {
@@ -106,6 +110,11 @@ const createStore = () => {
           .finally(() => {
             commit("updateReviewsLoading", false);
           });
+      },
+      getSingleReview({ commit }, payload) {
+        this.$axios.$get(`performance-reviews/${payload}`).then((res) => {
+          commit("setSingleReview", res.data.review);
+        });
       },
       deleteSingleReview({}, payload) {
         return this.$axios.$delete(`performance-reviews/${payload}`);

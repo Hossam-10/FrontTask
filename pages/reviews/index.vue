@@ -1,7 +1,10 @@
 <template>
   <div>
     <b-overlay :show="reviews.loading" rounded="lg" :opacity="1">
-      <b-container>
+      <h1 v-if="reviews.data.length == 0" class="text-center my-2">
+        No reviews yet
+      </h1>
+      <b-container v-else>
         <b-row>
           <b-col
             md="4"
