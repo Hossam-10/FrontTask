@@ -8,7 +8,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import EmployeeForm from "@/components/EmployeeForm";
+import EmployeeForm from "@/components/employee/EmployeeForm";
 export default {
   components: {
     EmployeeForm,

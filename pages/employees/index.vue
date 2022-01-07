@@ -7,7 +7,15 @@
             Create an Employee
           </button>
         </nuxt-link>
-        <nuxt-link class="btn btn-primary" :to="'/reviews'">Reviews</nuxt-link>
+        <nuxt-link
+          v-if="userData.is_admin"
+          class="btn btn-primary"
+          :to="'/reviews'"
+          >Reviews</nuxt-link
+        >
+        <nuxt-link class="btn btn-info" :to="'/feedback-requests'"
+          >Feedback Requests</nuxt-link
+        >
       </div>
       <b-overlay :show="employees.loading" rounded="lg" :opacity="1">
         <p v-if="!employees.loading && !employees.data">No Employees yet</p>
@@ -45,7 +53,7 @@
 </template>
 
 <script>
-import EmployeeCard from "@/components/EmployeeCard";
+import EmployeeCard from "@/components/employee/EmployeeCard";
 import { mapState, mapActions } from "vuex";
 export default {
   components: {
@@ -55,7 +63,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapState(["employees"]),
+    ...mapState(["employees", "userData"]),
   },
   methods: {
     // ...mapActions(["getEmployees", "updateEmployeesParams", "deleteEmployee"]),
