@@ -14,6 +14,10 @@ const createStore = () => {
         // },
       },
       singleEmployee: {},
+      reviews: {
+        data: [],
+        loading: null,
+      },
     },
     mutations: {
       setUserData(state, payload) {
@@ -37,6 +41,12 @@ const createStore = () => {
       // },
       setSingleEmployee(state, payload) {
         state.singleEmployee = payload;
+      },
+      setReviews(state, payload) {
+        state.reviews.data = payload;
+      },
+      updateReviewsLoading(state, payload) {
+        state.reviews.loading = payload;
       },
     },
     actions: {
@@ -85,6 +95,20 @@ const createStore = () => {
       },
       confirmReview({}, payload) {
         return this.$axios.$post("performance-reviews", payload);
+      },
+      getAllReviews({ commit }) {
+        commit("updateReviewsLoading", true);
+        return this.$axios
+          .$get("performance-reviews")
+          .then((res) => {
+            commit("setReviews", res.data.reviews);
+          })
+          .finally(() => {
+            commit("updateReviewsLoading", false);
+          });
+      },
+      deleteSingleReview({}, payload) {
+        return this.$axios.$delete(`performance-reviews/${payload}`);
       },
     },
   });

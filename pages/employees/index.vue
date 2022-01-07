@@ -7,6 +7,7 @@
             Create an Employee
           </button>
         </nuxt-link>
+        <nuxt-link :to="'/reviews'">Reviews</nuxt-link>
       </div>
       <b-overlay :show="employees.loading" rounded="lg" :opacity="1">
         <p v-if="!employees.loading && !employees.data">No Employees yet</p>

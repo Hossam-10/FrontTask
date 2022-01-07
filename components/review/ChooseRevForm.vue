@@ -82,7 +82,7 @@ export default {
           reviewee_id: this.singleEmployee.id,
         })
           .then(() => {
-            this.$router.push("/review");
+            this.$router.push("/reviews");
           })
           .catch(() => {
             this.$bvToast.toast("Please try again", {

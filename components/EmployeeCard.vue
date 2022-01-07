@@ -24,9 +24,9 @@
         <div class="w-75 m-auto" v-if="userData.id != employee.id">
           <nuxt-link
             class="btn btn-outline-primary w-100 mt-2"
-            :to="`review/${employee.id}`"
+            :to="`reviews/create/${employee.id}`"
           >
-            Performance Review
+            Create Review
           </nuxt-link>
         </div>
       </div>
