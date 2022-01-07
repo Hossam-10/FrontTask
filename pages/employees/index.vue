@@ -1,13 +1,13 @@
 <template>
   <div>
     <b-container>
-      <div class="w-50 ml-4">
+      <div class="d-flex justify-content-between">
         <nuxt-link :to="'/employees/create'">
           <button class="btn btn-secondary btn-large">
             Create an Employee
           </button>
         </nuxt-link>
-        <nuxt-link :to="'/reviews'">Reviews</nuxt-link>
+        <nuxt-link class="btn btn-primary" :to="'/reviews'">Reviews</nuxt-link>
       </div>
       <b-overlay :show="employees.loading" rounded="lg" :opacity="1">
         <p v-if="!employees.loading && !employees.data">No Employees yet</p>

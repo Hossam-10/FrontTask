@@ -119,6 +119,12 @@ const createStore = () => {
       deleteSingleReview({}, payload) {
         return this.$axios.$delete(`performance-reviews/${payload}`);
       },
+      updateReview({}, payload) {
+        return this.$axios.$put(
+          `performance-reviews/${payload.id}`,
+          payload.review
+        );
+      },
     },
   });
 };

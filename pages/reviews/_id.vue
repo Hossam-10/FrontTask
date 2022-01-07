@@ -16,9 +16,9 @@
         <p v-if="!singleReview.review">No review data yet</p>
         <div v-else>
           <h5>Performance Review is:</h5>
-          <p>Performance: {{ singleReview.review.performance }}</p>
-          <p>Speed: {{ singleReview.review.speed }}</p>
-          <p>Typing: {{ singleReview.review.typing }}</p>
+          <p>Performance: {{ reviewData.performance }}</p>
+          <p>Speed: {{ reviewData.speed }}</p>
+          <p>Typing: {{ reviewData.typing }}</p>
         </div>
       </div>
     </b-overlay>
@@ -35,13 +35,15 @@ export default {
   },
   computed: {
     ...mapState(["singleReview"]),
+    reviewData() {
+      return JSON.parse(this.singleReview.review);
+    },
   },
   methods: {
     ...mapActions(["getSingleReview"]),
   },
   mounted() {
     this.getSingleReview(this.$route.params.id).finally(() => {
-      debugger;
       this.reviewIsLoading = false;
     });
   },
