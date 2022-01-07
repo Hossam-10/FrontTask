@@ -19,6 +19,7 @@ const createStore = () => {
         loading: null,
       },
       singleReview: {},
+      feedbacks: [],
     },
     mutations: {
       setUserData(state, payload) {
@@ -51,6 +52,9 @@ const createStore = () => {
       },
       setSingleReview(state, payload) {
         state.singleReview = payload;
+      },
+      setFeedbackRequests(state, payload) {
+        state.feedbacks = payload;
       },
     },
     actions: {
@@ -97,8 +101,16 @@ const createStore = () => {
           commit("deleteUserData");
         });
       },
-      confirmReview({}, payload) {
-        return this.$axios.$post("performance-reviews", payload);
+      createFeedbackRequest({}, payload) {
+        return this.$axios.$post("feed-Back-requests", payload);
+      },
+      confirmReview({ dispatch }, payload) {
+        let feedbackRequest = {};
+        return this.$axios.$post("performance-reviews", payload).then((res) => {
+          feedbackRequest.performance_review_id = res.data.review.id;
+          feedbackRequest.reviewer_id = res.data.review.reviewer_id;
+          return dispatch("createFeedbackRequest", feedbackRequest);
+        });
       },
       getAllReviews({ commit }) {
         commit("updateReviewsLoading", true);
@@ -112,9 +124,11 @@ const createStore = () => {
           });
       },
       getSingleReview({ commit }, payload) {
-        this.$axios.$get(`performance-reviews/${payload}`).then((res) => {
-          commit("setSingleReview", res.data.review);
-        });
+        return this.$axios
+          .$get(`performance-reviews/${payload}`)
+          .then((res) => {
+            commit("setSingleReview", res.data.review);
+          });
       },
       deleteSingleReview({}, payload) {
         return this.$axios.$delete(`performance-reviews/${payload}`);
@@ -124,6 +138,11 @@ const createStore = () => {
           `performance-reviews/${payload.id}`,
           payload.review
         );
+      },
+      getFeedbackRequests({ commit }) {
+        return this.$axios.$get("user/feed-Back-requests").then((res) => {
+          commit("setFeedbackRequests", res.data.user.feedbacks);
+        });
       },
     },
   });
