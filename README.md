@@ -4,8 +4,9 @@ Updated notes:
 1-If you refresh the website after login you won't find user information
 because there's no API to return the user data I need this API to retrieve the user's information.
 
-2-User's create API is broken it returns server error therefore I can't do the
-review and feedback part cause I have only one user and I need multiple users.
+2-Feedback's APIs aren't working(show-update-delete)
+
+3-Feedbacks don't have id
 
 This Project is made by Nuxt.js (It's a Vue.js framework provides useful features) I used it to save more time.
 
@@ -20,6 +21,7 @@ Nuxt.js
 Vue.js (All components and pages)
 BootStrapVue
 Axios Module (Nuxt.js provides it)
+v-select
 CSS
 HTML
 
