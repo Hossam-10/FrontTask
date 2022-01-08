@@ -2,9 +2,9 @@
   <div class="border p-4">
     <div class="text-center">
       <h3 class="font-weight-bold">Reviewer</h3>
-      <p>{{ review.reviewer.name }}</p>
+      <p v-if="review.reviewer">{{ review.reviewer.name }}</p>
       <h3 class="font-weight-bold">Reviewee</h3>
-      <p>{{ review.reviewee.name }}</p>
+      <p v-if="review.reviewee">{{ review.reviewee.name }}</p>
     </div>
     <div class="d-flex justify-content-around" v-if="userData.is_admin">
       <nuxt-link :to="`/reviews/${review.id}`" class="btn btn-outline-info">
