@@ -4,9 +4,9 @@ Updated notes:
 1-If you refresh the website after login you won't find user information
 because there's no API to return the user data I need this API to retrieve the user's information.
 
-2-Feedback's APIs aren't working(show-update-delete)
+2-Feedback's APIs aren't working(show-update-delete).
 
-3-Feedbacks don't have id
+3-Feedbacks don't have id.
 
 This Project is made by Nuxt.js (It's a Vue.js framework provides useful features) I used it to save more time.
 
